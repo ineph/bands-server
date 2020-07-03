@@ -9,23 +9,47 @@ router.route('/').get((req, res) => {
 });
 
 //get specific
-router.route('/:id').get(function(req, res){
-    var id = req.params.id;
-    Band.findById(id, function(err, item){
-        res.json(item)
-    });
+router.route('/:id').get((req, res) => {
+    Band.findById(req.params.id)
+    .then(band => {res.json(band)})
+    .catch(err => {res.status(400).json('Error: ' + err)})
 });
 
-//post single one
-router.route('/add').post(function(res, res){
-    var newItem = new Band(req.body);
-    newItem.save()
-    .then(newItem => {
-        res.json('Added: ' + res.body);
-    })
-    .catch(err => {
-        res.status(400).send('unable to save to database');
-    }); 
+//post new one
+router.route('/add').post((req, res) => {
+
+    const name = req.body.name;
+    const genres = req.body.genres;
+    const lyrical_themes = req.body.lyrical_themes;
+    const country_of_origin = req.body.country_of_origin;
+    const location = req.body.location;
+    const status = req.body.status;
+    const formed_in = req.body.formed_in;
+    const years_active = req.body.years_active;
+    const labels = req.body.labels;
+
+    const newBand = new Band({
+        name,
+        genres,
+        lyrical_themes,
+        country_of_origin,
+        location,
+        status,
+        formed_in,
+        years_active,
+        labels
+    });
+
+    newBand.save()
+    .then(() => res.json('Band added! ID: ' + newBand._id))
+    .catch(err => res.status(400).json('Error: ' + err));
+});
+
+//delete one
+router.route('/:id').delete((req, res) => {
+    Band.findByIdAndDelete(req.params.id)
+    .then(() => res.json('Band ' + req.params.id + ' deleted successfully'))
+    .catch(err => res.status(400).json('Error: ' + err));
 });
 
 module.exports = router;
