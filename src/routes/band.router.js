@@ -9,7 +9,7 @@ router.route('/').get((req, res) => {
 });
 
 //update sigle one
-router.route('/update/:id').post((req, res) => {
+router.route('/update/:id').patch((req, res) => {
     Band.findByIdAndUpdate(req.params.id, req.body)
     .then(updated => {res.json(updated)})
     .catch(err => {res.status(400).json('Error: '+ err)})
