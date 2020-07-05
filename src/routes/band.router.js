@@ -8,6 +8,14 @@ router.route('/').get((req, res) => {
     .catch(err => res.status(400).json('ERROR: ' + err))
 });
 
+//update sigle one
+router.route('/update/:id').post((req, res) => {
+    Band.findByIdAndUpdate(req.params.id, req.body)
+    .then(updated => {res.json(updated)})
+    .catch(err => {res.status(400).json('Error: '+ err)})
+});
+
+
 //get specific
 router.route('/:id').get((req, res) => {
     Band.findById(req.params.id)
