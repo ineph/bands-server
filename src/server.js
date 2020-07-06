@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const bandRouter = require('./routes/band.router');
+const albumRouter = require('./routes/album.router');
 
 require('dotenv').config();
 
@@ -29,3 +30,4 @@ app.listen(port,() => {
 }); 
 
 app.use('/band', bandRouter);
+app.use('/album', albumRouter);

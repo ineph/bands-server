@@ -16,7 +16,7 @@ router.route('/:id').get((req, res) => {
 });
 
 //post new one
-router.route('/post').post((req, res) => {
+router.route('/add').post((req, res) => {
 
     const name = req.body.name;
     const songs = req.body.songs;
