@@ -10,8 +10,8 @@ router.route('/').get((req, res) => {
 
 //update sigle one
 router.route('/update/:id').patch((req, res) => {
-    Band.findByIdAndUpdate(req.params.id, req.body)
-    .then(updated => {res.json(updated)})
+    Band.findByIdAndUpdate(req.params.id, req.body, {new: true})
+    .then(updated => {res.json('Updated: ' + updated)})
     .catch(err => {res.status(400).json('Error: '+ err)})
 });
 
