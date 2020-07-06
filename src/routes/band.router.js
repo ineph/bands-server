@@ -8,14 +8,6 @@ router.route('/').get((req, res) => {
     .catch(err => res.status(400).json('ERROR: ' + err))
 });
 
-//update sigle one
-router.route('/update/:id').patch((req, res) => {
-    Band.findByIdAndUpdate(req.params.id, req.body, {new: true})
-    .then(updated => {res.json('Updated: ' + updated)})
-    .catch(err => {res.status(400).json('Error: '+ err)})
-});
-
-
 //get specific
 router.route('/:id').get((req, res) => {
     Band.findById(req.params.id)
@@ -25,7 +17,7 @@ router.route('/:id').get((req, res) => {
 
 //post new one
 router.route('/add').post((req, res) => {
-
+    
     const name = req.body.name;
     const genres = req.body.genres;
     const lyrical_themes = req.body.lyrical_themes;
@@ -35,7 +27,7 @@ router.route('/add').post((req, res) => {
     const formed_in = req.body.formed_in;
     const years_active = req.body.years_active;
     const labels = req.body.labels;
-
+    
     const newBand = new Band({
         name,
         genres,
@@ -47,10 +39,17 @@ router.route('/add').post((req, res) => {
         years_active,
         labels
     });
-
+    
     newBand.save()
     .then(() => res.json('Band added! ID: ' + newBand._id))
     .catch(err => res.status(400).json('Error: ' + err));
+});
+
+//update sigle one
+router.route('/update/:id').patch((req, res) => {
+    Band.findByIdAndUpdate(req.params.id, req.body, {new: true})
+    .then(updatedBand => {res.json('Updated: ' + updatedBand)})
+    .catch(err => {res.status(400).json('Error: '+ err)})
 });
 
 //delete one
