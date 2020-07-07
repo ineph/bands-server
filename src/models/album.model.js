@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const AlbumSchema = new Schema({
+const AlbumSchema = new Schema ({
     name:         {type: String, required: true},
     songs:        {type: String, required: true},
     bands:        {type: String, required: true},
