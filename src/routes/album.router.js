@@ -51,7 +51,7 @@ router.route('/update/:id').patch((req, res) => {
 //delete
 router.route('/:id').delete((req, res) => {
     Album.findByIdAndDelete(req.params.id)
-    .then(() => res.json('Album ' + req.params._id + ' deleted successfully'))
+    .then(() => res.json('Album ' + req.params.id + ' deleted successfully'))
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
