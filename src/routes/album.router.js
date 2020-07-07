@@ -54,3 +54,5 @@ router.route('/:id').delete((req, res) => {
     .then(() => res.json('Album ' + req.params._id + ' deleted successfully'))
     .catch(err => res.status(400).json('Error: ' + err));
 });
+
+module.exports = router
