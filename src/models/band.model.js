@@ -10,7 +10,9 @@ const BandSchema = new Schema ({
     status:            {type: String},
     formed_in:         {type: String},
     years_active:      {type: String},
-    labels:            {type: String}
+    labels:            {type: String},
+    albums:            [{type: mongoose.Schema.Types.ObjectId, ref: 'Album'}],
+    members:           [{type: mongoose.Schema.Types.ObjectId, ref: 'Artist'}]
 }, {
     timestamps: true
 });
