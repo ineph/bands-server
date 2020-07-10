@@ -5,14 +5,14 @@ const Artist = require('../models/artist.model');
 router.route('/').get((req, res) => {
     Artist.find()
     .then(artists => res.json(artists))
-    .catch(err => res.status(400).json('Error: ' + err))
+    .catch(err => res.status(500).json('Error: ' + err))
 });
 
 //get specific
 router.route('/:id').get((req, res) => {
     Artist.findById(req.params.id)
     .then(artist => res.json(artist))
-    .catch(err => res.status(400).json('Error: ' + err));
+    .catch(err => res.status(500).json('Error: ' + err));
 });
 
 //post new one
@@ -42,21 +42,21 @@ router.route('/add').post((req, res) => {
 
     newArtist.save()
     .then(() => res.json('Artist added! ID: ' + newArtist._id))
-    .catch(err => res.status(400).json('Error: ' + err));
+    .catch(err => res.status(500).json('Error: ' + err));
 });
 
 //update sigle one
 router.route('/update/:id').patch((req, res) => {
     Artist.findByIdAndUpdate(req.params.id, req.body, {new: true})
     .then(updatedArtist => res.json('Updated: ' + updatedArtist))
-    .catch(err => res.status(400).json('Error: ' + err));
+    .catch(err => res.status(500).json('Error: ' + err));
 });
 
 //delete one
 router.route('/:id').delete((req, res) => {
     Artist.findByIdAndDelete(req.params.id)
     .then(() => res.json('Artist ' + req.params.id + ' deleted successfully'))
-    .catch(err => res.status(400).json('Error: ' + err));
+    .catch(err => res.status(500).json('Error: ' + err));
 });
 
 module.exports = router;

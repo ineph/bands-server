@@ -5,14 +5,14 @@ let Band = require('../models/band.model');
 router.route('/').get((req, res) => {
     Band.find()
     .then(bands => res.json(bands))
-    .catch(err => res.status(400).json('ERROR: ' + err))
+    .catch(err => res.status(500).json('ERROR: ' + err))
 });
 
 //get specific
 router.route('/:id').get((req, res) => {
     Band.findById(req.params.id)
     .then(band => res.json(band))
-    .catch(err => res.status(400).json('Error: ' + err))
+    .catch(err => res.status(500).json('Error: ' + err))
 });
 
 //post new one
@@ -42,21 +42,21 @@ router.route('/add').post((req, res) => {
     
     newBand.save()
     .then(() => res.json('Band added! ID: ' + newBand._id))
-    .catch(err => res.status(400).json('Error: ' + err));
+    .catch(err => res.status(500).json('Error: ' + err));
 });
 
 //update sigle one
 router.route('/update/:id').patch((req, res) => {
     Band.findByIdAndUpdate(req.params.id, req.body, {new: true})
     .then(updatedBand => res.json('Updated: ' + updatedBand))
-    .catch(err => res.status(400).json('Error: '+ err))
+    .catch(err => res.status(500).json('Error: '+ err))
 });
 
 //delete one
 router.route('/:id').delete((req, res) => {
     Band.findByIdAndDelete(req.params.id)
     .then(() => res.json('Band ' + req.params.id + ' deleted successfully'))
-    .catch(err => res.status(400).json('Error: ' + err));
+    .catch(err => res.status(500).json('Error: ' + err));
 });
 
 module.exports = router;

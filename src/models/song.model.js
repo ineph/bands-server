@@ -3,10 +3,10 @@ const Schema = mongoose.Schema;
 
 const SongSchema = new Schema({
     name:   {type: String, required:true},
-    bands:  {type: String, required:true},
-    albums: {type: String},
+    bands:  [{type: mongoose.Schema.Types.ObjectId, ref: 'Band'}],
+    albums: [{type: mongoose.Schema.Types.ObjectId, ref: 'Album'}],
     lyrics: {type: String},
-    lineup: {type: String}
+    lineup: [{type: mongoose.Schema.Types.ObjectId, ref: 'Artist'}]
 },{
     timestamps: true
 });
