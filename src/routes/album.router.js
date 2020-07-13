@@ -47,13 +47,9 @@ router.route('/add').post((req, res) => {
 //update single one
 router.route('/update/:id').patch((req, res) => {
 
-    // Song.findByIdAndUpdate({_id: req.body.songs}, {$push:{albums: req.params.id}}, {useFindAndModify: false});
-    // .then(res.json('added album ' + req.params.id + ' to song ' + req.body.songs))
-    // .catch(err => res.status(400).json('Error: ' + err));
-
     Album.findByIdAndUpdate(req.params.id, req.body, {new: true})
-    .then(updatedAlbum => res.json('Upadated: ' + updatedAlbum))
-    .catch(err => res.status(500).json('Error: ' + err));
+    .then(updatedAlbum => res.json('Updated album: ' + updatedAlbum))
+    .catch(err => res.status(500).json('Error updating album => ' + err));
 });
 
 //delete

@@ -6,6 +6,7 @@ const bandRouter = require('./routes/band.router');
 const albumRouter = require('./routes/album.router');
 const songRouter = require('./routes/song.router');
 const artistRouter = require('./routes/artist.router');
+const linksRouter = require('./routes/links.router');
 
 require('dotenv').config();
 
@@ -36,3 +37,4 @@ app.use('/band', bandRouter);
 app.use('/album', albumRouter);
 app.use('/song', songRouter);
 app.use('/artist', artistRouter);
+app.use('/links', linksRouter);
